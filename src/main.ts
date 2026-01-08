@@ -92,3 +92,18 @@ return validActresses
     return []
   }
 }
+
+async function getActresses(ids: number[]): Promise <(Actress|null)[]> {
+  try{
+    const promises =ids.map(id=>getActress(id))
+    const actresses = await Promise.all(promises)
+    return actresses
+    } catch(error) {
+    if(error instanceof Error){
+      console.log('Errore nel recupero dati attrice', error.message)
+    } else{
+      console.log("Errore sconosciuto", error)
+    }
+    return []
+  }
+}
